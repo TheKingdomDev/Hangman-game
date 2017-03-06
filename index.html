@@ -31,12 +31,14 @@
 
 <!-- Location for the word to be guessed. Display is like so _ _ _ _ _ _ -->
 <div>
-	<h1 id = "wordToGuess"></h1>
+	<ul>
+		<li id = "wordToGuess"></li>
+	</ul>
 </div>
 
 <!-- Need a counter for number of guesses remaining -->
 <div>
-	<p>Number of guesses remaining - <span id = "numGuesses"></span></p>
+	<p>Number of guesses remaining - <span id="numGuesses"></span></p>
 </div>
 
 <!-- Must show the player the letters that have been guessed -->
@@ -45,7 +47,7 @@
 </div>
 
 <!-- Create a button to reset the game when the player has won or lost -->
-<button></button>
+<button id="reset">Reset</button>
 
 <div><span id = "userText"></span></div>
 

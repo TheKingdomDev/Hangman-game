@@ -3,7 +3,7 @@
 
 //Variables
 
-var userText = document.getElementById("userText");
+var userText = document.getElementById("wrongGuesses");
 
 
 //Need an array to store a set of words for the player to guess
@@ -53,10 +53,10 @@ function startGame() {
 	guessesLeft = 15;
 	wrongLetters = [];
 	numBlanks = [];
-	answer;
+	alphabet;
 
 	//Create the blanks for the letters
-	for(var i = 0; i < numBlanks; i++) {
+	for(var i = 0; i < chooseWord.length; i++) {
 		wordBlanks.push("_");
 		document.getElementById("wordToGuess").innerHTML = wordBlanks;
 	}
@@ -78,38 +78,37 @@ function startGame() {
 
 //function to see if the player has pressed a correct letter or not
 function compare(userKey) {
-	if (chooseWord.indexof(userKey) > -1) {
+	if (chooseWord.indexOf(userKey) > -1) {
 		for(var i = 0; i < numBlanks; i++) {
 			if(answer[i] === userKey) {
 				wordBlanks[i] = userKey;
 				document.getElementById("wordToGuess").innerHTML = wordBlanks.join("");
 			}
 		}
-	}
+	} 
 	else {
 		wrongLetters.push(userKey);
 		guessesLeft--;
 		document.getElementById("numGuesses").innerHTML = guessesLeft;
-		document.getElementById(wrongGuesses).innerHTML = wrongLetters;
+		document.getElementById("wrongGuesses").innerHTML = wrongLetters;
 			//debug
 			console.log(wrongLetters);
-			console.logt(guessesLeft);
+			console.log(guessesLeft);
 	}
 }
 	
 
-
-//Need a counter for number of wins and for guesses remaining
-	//Letters already guessed should not appear again when the player hits a key multiple times
 
 //If the player wins do something
 function winLose() {
 	if(rightGuess === numBlanks) {
 		wins++;
 		document.getElementById("wins").innerHTML = wins;
+		alert(messages.win);
 		reset();
 	} else if(guessesLeft === 0) {
 		losses++;
+		alert(messages.lose)
 		document.getElementById("losses").innerHTML = losses;
 		reset();
 	}
@@ -139,6 +138,7 @@ function reset() {
 startGame();
 
 document.onkeyup = function(event) {
-	userText.textContent = event.key;
-	compare();
+	console.log("Onkey up event fired!");
+	userText.innerHTML = event.key;
+	compare(event.key);
 };
