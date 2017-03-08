@@ -3,51 +3,57 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Hangman-game</title>
-
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+	<!-- <link rel="stylesheet" href="assets/css/reset.css"> -->
 </head>
 <body>
 
 <!-- Theme for the game will be Classic Video Games -->
 
 <!-- Banner or Header Image -->
+<div class = "banner">
+	<img src="assets/images/arcadeBanner.png" alt="arcadeBanner">
+</div>
 
 <!-- Main container for the application -->
-<div class = "container"></div>
+<div class = "container clearfix">
 
 <!-- Press a letter key on the keyboard to play the game -->
-<div>
-	<h2>Press a letter to Play!</h2>
+		<div>
+			<h2>Insert Coins To Play! The game is Hangman - Press a Letter to Start!</h2>
+		</div>
+
+		
+		<div class = "winsAndLosses">
+				<!-- Need a counter for number of wins -->
+			<p>Number of wins - <p id = "wins"></p></p>
+				<!-- Need a counter for number of guesses remaining -->
+			<p>Number of lives remaining - <p id="numGuesses"></p</p>
+				<!-- Need a counter for number of losses -->
+			<p>Number of losses - <p id = "losses"></p></p>
+		</div>
+
+		<!-- Location for the word to be guessed. Display is like so _ _ _ _ _ _ -->
+		<div>
+			<h1>Can you guess what game I want to play?</h1>
+			<h2 id = "wordToGuess"></h2>
+		</div>
+
+		<!-- Need a counter for number of guesses remaining -->
+		
+
+		<!-- Must show the player the letters that have been guessed -->
+		<div class = "lettersDiv">
+			<p>Letters guessed - <p id = "wrongGuesses"></p></p>
+		</div>
+
+		<!-- Create a button to reset the game when the player has won or lost -->
+		<button id="reset">Reset</button>
+
 </div>
 
-<!-- Need a counter for number of wins -->
-<div>
-	<p>Number of wins - <span id = "wins"></span></p>
-</div>
 
-<!-- Need a counter for number of losses -->
-<div>
-	<p>Number of losses - <span id = "losses"></span></p>
-</div>
-
-<!-- Location for the word to be guessed. Display is like so _ _ _ _ _ _ -->
-<div>
-	<h2 id = "wordToGuess"></h2>
-</div>
-
-<!-- Need a counter for number of guesses remaining -->
-<div>
-	<p>Number of guesses remaining - <span id="numGuesses"></span></p>
-</div>
-
-<!-- Must show the player the letters that have been guessed -->
-<div>
-	<p>Letters guessed - <span id = "wrongGuesses"></span></p>
-</div>
-
-<!-- Create a button to reset the game when the player has won or lost -->
-<button id="reset">Reset</button>
-
-<div><span id = "userText"></span></div>
 
 
 <script src="assets/game.js"></script>

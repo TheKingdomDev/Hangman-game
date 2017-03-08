@@ -1,0 +1,40 @@
+body {
+	background-color: #000;
+}
+
+.container {
+	margin: 20px auto;
+	width: 50%;
+	height: 500px;
+	text-align: center;
+	border: 20px solid #ff030d;
+	background-color: #030aff;
+	padding: 15px;
+	color: #f5f714;
+	font-family: 'VT323', monospace;
+	position: relative;
+}
+
+.banner {
+	text-align: center;
+	border: 20px solid #ff030d;
+}
+
+h2 {
+	font-size: 28px;
+	margin: 5px;
+}
+
+.winsAndLosses {
+	float: left;
+	font-size: 24px;
+}
+
+.lettersDiv {
+	margin: 80px;
+
+}
+
+.clearfix {
+  overflow: auto;
+}
