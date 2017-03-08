@@ -172,6 +172,9 @@ function roundComplete(){
 function reset() {
 	document.querySelector(".the-button.plastic").onclick = function() {
    	window.startGame();
+   	lossCounter = 0;
+   	winsCounter = 0;
+
    }
 }
 
