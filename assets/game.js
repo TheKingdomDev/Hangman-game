@@ -3,16 +3,6 @@
 
 //Variables
 
-var userText = document.getElementById("wrongGuesses");
-
-
-//Need an array to store a set of words for the player to guess
-var games = ["GALAGA", "ASTEROIDS", "JOUST", "FROGGER", "DEFENDER", "PAPERBOY", "CENTIPEDE", "GAUNTLET", "CONTRA"];
-//Need an array of the available letters for the player to guess and make sure they dont guess more then wonce
-var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-
-//Create an array to hold the answer and iterate the number of blanks to display for each game
-var answer = [];
 //Create an object to hold different messages to display to the player when a condition is met
 var messages = {
 	win: "You Win! Good Job!",
@@ -21,52 +11,53 @@ var messages = {
 	valid: "Please press a letter on the keyboard from A-Z"
 };
 
-//Must choose a word on start or reset
-var chooseWord = games[Math.floor(Math.random() * games.length)];
-//This variable holds the word
-var guess = "";
+var wordToGuess = "";
 //This variable holds each letter in the word
-var letterUsed = [];
+var lettersInChosenWord = [];
 //Variable to hold the number of blanks in the word
 var numBlanks = 0;
 //Variable to hold the blanks and successful guesses
 var wordBlanks = [];
 //Holds wrong guesses
-var wrongLetters = [];
+var wrongGuess = [];
 //Counters
-var guessesLeft = 15;
-var wins = 0;
-var losses = 0;
-var rightGuess = 0;
+var guessesLeft = 12;
+var winsCounter = 0;
+var lossCounter = 0;
+var blanksAndSuccess = 0;
 
 
 // Functions
 
+var chooseWord = function() {
+	var games = ["galaga", "asteroids", "donkeykong", "streetfighter", "centipede", "joust", "frogger", "defender", "paperboy", "gauntlet", "contra", "pacman", "spaceinvaders", "missilecommand", "zaxxon", "doubledragon"];
+	return games[Math.floor(Math.random() * games.length)];
+}
+
+
 //Create functions for game start
 function startGame() {
-	chooseWord;
-	letterUsed = chooseWord.split("");
+	wordToGuess = chooseWord();
+	letterUsed = wordToGuess.split("");
 	numBlanks = letterUsed.length;
-
+	document.getElementById("wrongGuesses").innerHTML = "";
 	//Reset values back to start
 	rightGuess = 0;
-	guessesLeft = 15;
-	wrongLetters = [];
-	numBlanks = [];
-	alphabet;
+	guessesLeft = 12;
+	wrongGuess = [];
+	blanksAndSuccess = [];
 
 	//Create the blanks for the letters
-	for(var i = 0; i < chooseWord.length; i++) {
-		wordBlanks.push("_");
-		document.getElementById("wordToGuess").innerHTML = wordBlanks;
+	for(var i = 0; i < wordToGuess.length; i++) {
+		blanksAndSuccess.push("_");
 	}
 
 		//Changes to HTML
-		document.getElementById("wordToGuess").innerHTML = wordBlanks.join("_");
-		document.getElementById("numGuesses").innerHTML = guessesLeft;
-		document.getElementById("wins").innerHTML = wins;
-		document.getElementById("losses").innerHTML = losses;
-		document.getElementById("wrongGuesses").innerHTML = wrongLetters;
+		document.getElementById("wordToGuess").innerHTML = blanksAndSuccess.join("_");
+		document.getElementById("numGuesses").innerHTML = String(guessesLeft);
+		document.getElementById("wins").innerHTML = String(winsCounter);
+		document.getElementById("losses").innerHTML = String(lossCounter);
+		document.getElementById("wrongGuesses").innerHTML ="";
 
 		//Debugging
 		console.log(chooseWord);
@@ -77,43 +68,102 @@ function startGame() {
 }
 
 //function to see if the player has pressed a correct letter or not
-function compare(userKey) {
-	if (chooseWord.indexOf(userKey) > -1) {
-		for(var i = 0; i < numBlanks; i++) {
-			if(answer[i] === userKey) {
-				wordBlanks[i] = userKey;
-				document.getElementById("wordToGuess").innerHTML = wordBlanks.join("");
-			}
-		}
-	} 
-	else {
-		wrongLetters.push(userKey);
-		guessesLeft--;
-		document.getElementById("numGuesses").innerHTML = guessesLeft;
-		document.getElementById("wrongGuesses").innerHTML = wrongLetters;
-			//debug
-			console.log(wrongLetters);
-			console.log(guessesLeft);
-	}
+// function compare(userKey) {
+// 	if (wordToGuess.indexOf(userKey) > -1) {
+// 		for(var i = 0; i < wordToGuess.length; i++) {
+// 			if(wordToGuess[i] === userKey) {
+// 				rightGuess.push(userText);
+// 				document.getElementById("wordToGuess").innerHTML = wordBlanks.join("");
+// 			}
+// 		}
+// 	} 
+// 	else {
+// 		wrongLetters.push(userKey);
+// 		guessesLeft--;
+// 		document.getElementById("numGuesses").innerHTML = guessesLeft;
+// 		document.getElementById("wrongGuesses").innerHTML = wrongLetters;
+// 			//debug
+// 			console.log(wrongLetters);
+// 			console.log(guessesLeft);
+// 	}
+// }
+
+function checkLetter(letter){
+    /*
+    function checks the argument letter with the choosenword if letter is present then the char will be
+    revealed in the array. Otherwise the numGuess will decrease by one.
+     */
+
+    var letterInWord = false;
+    for(var i = 0; i < numBlanks; i++){
+        if(wordToGuess[i] === letter){
+            letterInWord = true;
+        }
+    }
+    if(letterInWord){
+        for( i = 0; i < numBlanks; i++){
+            if(wordToGuess[i] === letter){
+                blanksAndSuccess[i] = letter;
+            }
+        }
+    }
+    else {
+        if(wrongGuess.length == 0) {
+            wrongGuess.push(letter);
+            guessesLeft--;
+        }else if(wrongGuess.indexOf(letter) < 0){
+            wrongGuess.push(letter);
+            guessesLeft--;
+        }
+        else{
+            alert(letter + " has been used.")
+            document.getElementById("wrongGuesses").innerHTML = String(letter + ' has been used.');
+        }
+    }
 }
+
 	
 
 
-//If the player wins do something
-function winLose() {
-	if(rightGuess === numBlanks) {
-		wins++;
-		document.getElementById("wins").innerHTML = wins;
-		alert(messages.win);
-		reset();
-	} else if(guessesLeft === 0) {
-		losses++;
-		alert(messages.lose)
-		document.getElementById("losses").innerHTML = losses;
-		reset();
-	}
+// //If the player wins do something
+// function winLose() {
+// 	if(rightGuess === numBlanks) {
+// 		wins++;
+// 		document.getElementById("wins").innerHTML = wins;
+// 		alert(messages.win);
+// 		reset();
+// 	} else if(guessesLeft === 0) {
+// 		losses++;
+// 		alert(messages.lose)
+// 		document.getElementById("losses").innerHTML = losses;
+// 		reset();
+// 	}
+// }
+
+function roundComplete(){
+    /*
+    function roundComplete verifies the game is over by either win or loss
+     */
+    document.getElementById("wordToGuess").innerHTML = blanksAndSuccess.join(' ');
+    document.getElementById("numGuesses").innerHTML = guessesLeft;
+    document.getElementById("wrongGuesses").innerHTML = wrongGuess.join(' ');
+
+    if(lettersInChosenWord.join(' ') === blanksAndSuccess.join(' ')){
+        console.log("You won!");
+        winCounter++;
+        document.getElementById("wins").innerHTML = winCounter;
+        alert('You win the word is ' + lettersInChosenWord.join(''));
+        gameStart();
+
+    }
+    else if(guessesLeft == 0){
+        lossCounter++;
+        document.getElementById("losses").innerHTML = String(lossCounter);
+        alert('You lose, the word was:  '+ wordToGuess);
+        gameStart();
+    }
 }
-//If the player loses reset and try again -- use the reset button to do this
+
 
 //Reset the game on win or lose
 
@@ -127,7 +177,7 @@ function reset() {
 
 	//Reset values back to start
 	rightGuess = 0;
-	guessesLeft = 15;
+	guessesLeft = 12;
 	wrongLetters = [];
 	numBlanks = [];
 	answer;
@@ -137,8 +187,14 @@ function reset() {
 
 startGame();
 
-document.onkeyup = function(event) {
-	console.log("Onkey up event fired!");
-	userText.innerHTML = event.key;
-	compare(event.key);
+// document.onkeyup = function(event) {
+// 	console.log("Onkey up event fired!");
+// 	userText.innerHTML = event.key.toUpperCase();
+// 	compare(event.key);
+// };
+
+document.onkeyup = function (event) {
+    var guessLetter = String.fromCharCode(event.keyCode).toLowerCase();
+    checkLetter(guessLetter);
+    roundComplete()
 };
