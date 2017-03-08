@@ -117,7 +117,7 @@ function checkLetter(letter){
         }
         else{
             alert(letter + " has been used.")
-            document.getElementById("wrongGuesses").innerHTML = String(letter + ' has been used.');
+            document.getElementById("wrongGuesses").innerHTML = String(letter + " has been used.");
         }
     }
 }
@@ -144,24 +144,23 @@ function roundComplete(){
     /*
     function roundComplete verifies the game is over by either win or loss
      */
-    document.getElementById("wordToGuess").innerHTML = blanksAndSuccess.join(' ');
+    document.getElementById("wordToGuess").innerHTML = blanksAndSuccess.join("");
     document.getElementById("numGuesses").innerHTML = guessesLeft;
-    document.getElementById("wrongGuesses").innerHTML = wrongGuess.join(' ');
+    document.getElementById("wrongGuesses").innerHTML = wrongGuess.join("");
     console.log("Here in this function");
-    console.log(letterUsed);
+    
 
     if(letterUsed.join("") === blanksAndSuccess.join("")){
-        console.log("You won!");
         winsCounter++;
         document.getElementById("wins").innerHTML = winsCounter;
-        alert('You win the word is ' + lettersInChosenWord.join(""));
+        alert("You win the word is " + wordToGuess);
         startGame();
 
     }
     else if(guessesLeft == 0){
         lossCounter++;
         document.getElementById("losses").innerHTML = String(lossCounter);
-        alert('You lose, the word was:  '+ wordToGuess);
+        alert("You lose, the word was:  " + wordToGuess);
         startGame();
     }
 }
