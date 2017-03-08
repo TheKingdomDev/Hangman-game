@@ -169,12 +169,16 @@ function roundComplete(){
 
 //Reset the game on win or lose
 
-// function reset() {
-// 	document.getElementsByClassName("the-button plastic").onclick = function() {
-//    	gameStart();
-// };
+function reset() {
+	document.querySelector(".the-button.plastic").onclick = function() {
+   	window.startGame();
+   }
+}
 
 startGame();
+reset();
+
+
 
 
 // document.onkeyup = function(event) {
