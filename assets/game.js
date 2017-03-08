@@ -147,45 +147,35 @@ function roundComplete(){
     document.getElementById("wordToGuess").innerHTML = blanksAndSuccess.join(' ');
     document.getElementById("numGuesses").innerHTML = guessesLeft;
     document.getElementById("wrongGuesses").innerHTML = wrongGuess.join(' ');
+    console.log("Here in this function");
+    console.log(letterUsed);
 
-    if(lettersInChosenWord.join(' ') === blanksAndSuccess.join(' ')){
+    if(letterUsed.join("") === blanksAndSuccess.join("")){
         console.log("You won!");
-        winCounter++;
-        document.getElementById("wins").innerHTML = winCounter;
-        alert('You win the word is ' + lettersInChosenWord.join(''));
-        gameStart();
+        winsCounter++;
+        document.getElementById("wins").innerHTML = winsCounter;
+        alert('You win the word is ' + lettersInChosenWord.join(""));
+        startGame();
 
     }
     else if(guessesLeft == 0){
         lossCounter++;
         document.getElementById("losses").innerHTML = String(lossCounter);
         alert('You lose, the word was:  '+ wordToGuess);
-        gameStart();
+        startGame();
     }
 }
 
 
 //Reset the game on win or lose
 
-function reset() {
-	//Choose a new random word from the games array
-	chooseWord;
-	//Need to split the letters
-	letterUsed = chooseWord.split("");
-	//Get the number of blanks
-	numBlanks = letterUsed.length; 
-
-	//Reset values back to start
-	rightGuess = 0;
-	guessesLeft = 12;
-	wrongLetters = [];
-	numBlanks = [];
-	answer;
-
-	startGame;
-}
+// function reset() {
+// 	document.getElementsByClassName("the-button plastic").onclick = function() {
+//    	gameStart();
+// };
 
 startGame();
+
 
 // document.onkeyup = function(event) {
 // 	console.log("Onkey up event fired!");
@@ -196,5 +186,5 @@ startGame();
 document.onkeyup = function (event) {
     var guessLetter = String.fromCharCode(event.keyCode).toLowerCase();
     checkLetter(guessLetter);
-    roundComplete()
+    roundComplete();
 };
