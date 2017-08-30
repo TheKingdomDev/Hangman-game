@@ -67,27 +67,6 @@ function startGame() {
 
 }
 
-//function to see if the player has pressed a correct letter or not
-// function compare(userKey) {
-// 	if (wordToGuess.indexOf(userKey) > -1) {
-// 		for(var i = 0; i < wordToGuess.length; i++) {
-// 			if(wordToGuess[i] === userKey) {
-// 				rightGuess.push(userText);
-// 				document.getElementById("wordToGuess").innerHTML = wordBlanks.join("");
-// 			}
-// 		}
-// 	} 
-// 	else {
-// 		wrongLetters.push(userKey);
-// 		guessesLeft--;
-// 		document.getElementById("numGuesses").innerHTML = guessesLeft;
-// 		document.getElementById("wrongGuesses").innerHTML = wrongLetters;
-// 			//debug
-// 			console.log(wrongLetters);
-// 			console.log(guessesLeft);
-// 	}
-// }
-
 function checkLetter(letter){
     /*
     function checks the argument letter with the choosenword if letter is present then the char will be
@@ -121,24 +100,6 @@ function checkLetter(letter){
         }
     }
 }
-
-	
-
-
-// //If the player wins do something
-// function winLose() {
-// 	if(rightGuess === numBlanks) {
-// 		wins++;
-// 		document.getElementById("wins").innerHTML = wins;
-// 		alert(messages.win);
-// 		reset();
-// 	} else if(guessesLeft === 0) {
-// 		losses++;
-// 		alert(messages.lose)
-// 		document.getElementById("losses").innerHTML = losses;
-// 		reset();
-// 	}
-// }
 
 function roundComplete(){
     /*
@@ -177,17 +138,11 @@ function reset() {
    }
 }
 
+
+// Call Start Game and Reset
 startGame();
 reset();
 
-
-
-
-// document.onkeyup = function(event) {
-// 	console.log("Onkey up event fired!");
-// 	userText.innerHTML = event.key.toUpperCase();
-// 	compare(event.key);
-// };
 
 document.onkeyup = function (event) {
     var guessLetter = String.fromCharCode(event.keyCode).toLowerCase();
